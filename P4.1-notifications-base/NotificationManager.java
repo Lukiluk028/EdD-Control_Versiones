@@ -1,12 +1,12 @@
 // NotificationManager.java - Código a refactorizar
 public class NotificationManager{
-    // TODO: Separar en clases diferentes: EmailService, SMSService, PushService
-    // TODO: Aplicar patrón Strategy para los tipos de notificación
-    // TODO: Añadir sistema de logs
+
     
     public void send(NotificationService service, String message, String recipient) {
+        if (service == null || message == null || recipient == null || recipient.isEmpty()) {
+            throw new IllegalArgumentException("Los parámetros de notificación no pueden ser nulos o vacíos");
+        }
         service.send(message, recipient);
-
     }
     
     // TODO: Añadir método para enviar a múltiples destinatarios
