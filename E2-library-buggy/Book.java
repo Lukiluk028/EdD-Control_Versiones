@@ -25,17 +25,33 @@ public class Book {
     
     public void borrow() {
         // BUG 2: No valida si ya está prestado // SOLUCIONADO
-        if (!available) {
-            throw new IllegalStateException("Book is already borrowed");
-        }
+        validateNotBorrowed();
         available = false;
     }
     
     public void returnBook() {
         // BUG 3: No valida si ya estaba disponible // SOLUCIONADO
+        validateBorrowed();
+        available = true;
+    }
+    
+    /**
+     * Valida que el libro no esté prestado
+     * @throws IllegalStateException si el libro ya está prestado
+     */
+    private void validateNotBorrowed() {
+        if (!available) {
+            throw new IllegalStateException("Book is already borrowed");
+        }
+    }
+    
+    /**
+     * Valida que el libro esté prestado
+     * @throws IllegalStateException si el libro ya está disponible
+     */
+    private void validateBorrowed() {
         if (available) {
             throw new IllegalStateException("Book is already available");
         }
-        available = true;
     }
 }

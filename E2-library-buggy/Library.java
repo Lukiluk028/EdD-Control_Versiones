@@ -6,12 +6,21 @@ public class Library {
     
     public void addBook(Book book) {
         // BUG 4: Permite libros duplicados (mismo ISBN) // SOLUCIONADO
+        validateUniqueISBN(book);
+        books.add(book);
+    }
+    
+    /**
+     * Valida que no exista un libro con el mismo ISBN
+     * @param book el libro a validar
+     * @throws IllegalArgumentException si ya existe un libro con el mismo ISBN
+     */
+    private void validateUniqueISBN(Book book) {
         for (Book existingBook : books) {
             if (existingBook.getIsbn().equals(book.getIsbn())) {
                 throw new IllegalArgumentException("Book with ISBN " + book.getIsbn() + " already exists");
             }
         }
-        books.add(book);
     }
     
     public List<Book> getBooks() {
