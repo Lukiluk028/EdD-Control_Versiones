@@ -5,12 +5,21 @@ public class Library {
     private List<Book> books = new ArrayList<>();
     
     public void addBook(Book book) {
-        // BUG 4: Permite libros duplicados (mismo ISBN)
+        // BUG 4: Permite libros duplicados (mismo ISBN) // SOLUCIONADO
+        for (Book existingBook : books) {
+            if (existingBook.getIsbn().equals(book.getIsbn())) {
+                throw new IllegalArgumentException("Book with ISBN " + book.getIsbn() + " already exists");
+            }
+        }
         books.add(book);
     }
     
+    public List<Book> getBooks() {
+        return books;
+    }
+    
     public Book findBookByTitle(String title) {
-        // BUG 5: Sensible a mayúsculas/minúsculas
+        
         for (Book book : books) {
             if (book.getTitle().equals(title)) {
                 return book;
