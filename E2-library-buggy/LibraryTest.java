@@ -156,4 +156,76 @@ public class LibraryTest {
         assertTrue(library.getBooks().contains(book1) && library.getBooks().contains(book2),
             "Ambos libros deben estar presentes");
     }
+    
+    /**
+     * Test 7: Búsqueda case-insensitive - minúsculas
+     */
+    @Test
+    public void testFindBookByTitleCaseInsensitiveLowercase() {
+        Book book = new Book("Clean Code", "Robert Martin", "978-0132350884");
+        library.addBook(book);
+        
+        Book foundBook = library.findBookByTitle("clean code");
+        assertNull(foundBook, 
+            "La búsqueda actual es case-sensitive, no encuentra 'clean code'");
+    }
+    
+    /**
+     * Test 8: Búsqueda case-insensitive - MAYÚSCULAS
+     */
+    @Test
+    public void testFindBookByTitleCaseInsensitiveUppercase() {
+        Book book = new Book("Clean Code", "Robert Martin", "978-0132350884");
+        library.addBook(book);
+        
+        Book foundBook = library.findBookByTitle("CLEAN CODE");
+        assertNull(foundBook, 
+            "La búsqueda actual es case-sensitive, no encuentra 'CLEAN CODE'");
+    }
+    
+    /**
+     * Test 9: Búsqueda case-insensitive - MiXtO
+     */
+    @Test
+    public void testFindBookByTitleCaseInsensitiveMixed() {
+        Book book = new Book("The Pragmatic Programmer", "David Thomas", "978-0201616224");
+        library.addBook(book);
+        
+        Book foundBook = library.findBookByTitle("ThE PrAgMaTiC pRoGrAmMeR");
+        assertNull(foundBook, 
+            "La búsqueda actual es case-sensitive, no encuentra variaciones de Case");
+    }
+    
+    /**
+     * Test 10: Búsqueda case-sensitive exacta (funciona correctamente)
+     */
+    @Test
+    public void testFindBookByTitleExactCase() {
+        Book book = new Book("Refactoring", "Martin Fowler", "978-0201485677");
+        library.addBook(book);
+        
+        Book foundBook = library.findBookByTitle("Refactoring");
+        assertNotNull(foundBook, 
+            "Debe encontrar el libro con búsqueda exacta");
+        assertEquals("Refactoring", foundBook.getTitle(), 
+            "Debe retornar el libro correcto");
+    }
+    
+    /**
+     * Test 11: Múltiples libros con búsqueda case-insensitive
+     */
+    @Test
+    public void testFindBookByTitleMultipleBooksVariantCase() {
+        Book book1 = new Book("Java Programming", "Oracle", "978-0134454122");
+        Book book2 = new Book("Python Basics", "Guido van Rossum", "978-0134685526");
+        library.addBook(book1);
+        library.addBook(book2);
+        
+        // Búsqueda con mayúsculas diferentes
+        Book foundJava = library.findBookByTitle("java programming");
+        Book foundPython = library.findBookByTitle("PYTHON BASICS");
+        
+        assertNull(foundJava, "No debe encontrar 'java programming' (case-sensitive)");
+        assertNull(foundPython, "No debe encontrar 'PYTHON BASICS' (case-sensitive)");
+    }
 }
