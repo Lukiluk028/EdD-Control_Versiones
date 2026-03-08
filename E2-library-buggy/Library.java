@@ -49,5 +49,19 @@ public class Library {
         return availableBooks;
     }
     
-    // BUG 8: Falta método para quitar libros
+    // BUG 8: Falta método para quitar libros // SOLUCIONADO
+    /**
+     * Quita un libro de la biblioteca por su ISBN
+     * @param isbn el ISBN del libro a quitar
+     * @return true si el libro fue encontrado y quitado, false en caso contrario
+     */
+    public boolean removeBookByISBN(String isbn) {
+        for (Book book : books) {
+            if (book.getIsbn().equals(isbn)) {
+                books.remove(book);
+                return true;
+            }
+        }
+        return false;
+    }
 }
