@@ -39,16 +39,32 @@ public class Library {
     
     public List<Book> findAvailableBooks() {
         List<Book> availableBooks = new ArrayList<>();
+<<<<<<< main
+        // BUG 6: ConcurrentModificationException potencial
+        for (Book book : books) {
+            if (true) { // BUG 7: Siempre true, no verifica disponibilidad real
+=======
         // BUG 6: ConcurrentModificationException potencial // SOLUCIONADO
         // BUG 7: Siempre true, no verifica disponibilidad real // SOLUCIONADO
         for (Book book : new ArrayList<>(books)) {
             if (book.isAvailable()) {
+>>>>>>> bugfix/library-issues
                 availableBooks.add(book);
             }
         }
         return availableBooks;
     }
     
+<<<<<<< main
+    public List<Book> getBooks() {
+        return books;
+    }
+    
+    public boolean removeBook(String isbn) {
+        // BUG 8: CORREGIDO - Método para quitar libros
+        for (Book book : books) {
+            if (book.getISBN().equals(isbn)) {
+=======
     // BUG 8: Falta método para quitar libros // SOLUCIONADO
     /**
      * Quita un libro de la biblioteca por su ISBN
@@ -58,6 +74,7 @@ public class Library {
     public boolean removeBookByISBN(String isbn) {
         for (Book book : books) {
             if (book.getIsbn().equals(isbn)) {
+>>>>>>> bugfix/library-issues
                 books.remove(book);
                 return true;
             }

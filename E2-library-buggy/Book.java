@@ -1,7 +1,7 @@
 // Book.java
 public class Book {
     private String title;
-    private String author;
+    private String author;https://github.com/Hugogonfer/EdD-ControlDeVersiones/pull/23/conflict?name=E2-library-buggy%252FLibrary.java&ancestor_oid=8e9e3272b00d3bd0c785379e14111781da025d70&base_oid=b68f355e411f0262640b7627414984bb9161a48d&head_oid=5a8308242962c1f48f68c9060d102e6d01cc6942
     private String isbn;
     private boolean available;
     
