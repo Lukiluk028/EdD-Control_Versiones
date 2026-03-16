@@ -15,9 +15,9 @@ public class Library {
     }
     
     public Book findBookByTitle(String title) {
-        // BUG 5: Sensible a mayúsculas/minúsculas
+        // BUG 5: CORREGIDO - Ahora busca sin importar mayúsculas/minúsculas
         for (Book book : books) {
-            if (book.getTitle().equals(title)) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
                 return book;
             }
         }
