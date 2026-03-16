@@ -5,7 +5,12 @@ public class Library {
     private List<Book> books = new ArrayList<>();
     
     public void addBook(Book book) {
-        // BUG 4: Permite libros duplicados (mismo ISBN)
+        // BUG 4: CORREGIDO - Ahora valida que no existan duplicados (mismo ISBN)
+        for (Book existingBook : books) {
+            if (existingBook.getISBN().equals(book.getISBN())) {
+                throw new IllegalArgumentException("Ya existe un libro con el ISBN: " + book.getISBN());
+            }
+        }
         books.add(book);
     }
     
@@ -28,6 +33,10 @@ public class Library {
             }
         }
         return availableBooks;
+    }
+    
+    public List<Book> getBooks() {
+        return books;
     }
     
     // BUG 8: Falta método para quitar libros
