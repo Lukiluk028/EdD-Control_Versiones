@@ -5,7 +5,7 @@ public class Book {
     private String isbn;
     private boolean available;
     
-    public Book(String title, String author, String isbn) {
+    public Book(String title, String author, String isbn, Boolean available) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -15,15 +15,23 @@ public class Book {
     // BUG 1: No hay getters/setters para todos los campos
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
-    // Faltan getIsbn() y isAvailable()
+    public String getISBN() { return isbn;}
+    public Boolean getAvailable() { return available;}
+    // Faltan getIsbn() y isAvailable
     
     public void borrow() {
-        // BUG 2: No valida si ya está prestado
+        // BUG 2: CORREGIDO - Ahora valida si ya está prestado
+        if (!available) {
+            throw new IllegalStateException("El libro ya está prestado, no puede prestarse nuevamente");
+        }
         available = false;
     }
     
     public void returnBook() {
-        // BUG 3: No valida si ya estaba disponible
+        // BUG 3: CORREGIDO - Ahora valida si ya estaba disponible
+        if (available) {
+            throw new IllegalStateException("El libro ya está disponible, no puede devolverse");
+        }
         available = true;
     }
 }
